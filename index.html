@@ -94,9 +94,9 @@ const SITE = {
     lede: 'PyroBuy China Fireworks Sourcing Experts',
     stats: [
       { value: '150+',     label: 'Factories' },
-      { value: '6000+',    label: 'Containers' },
-      { value: '10000+',   label: 'Active SKUs' },
-      { value: '100000+',  label: 'Total Cartons' }
+      { value: '6,000+',    label: 'Containers' },
+      { value: '10,000+',   label: 'Active SKUs' },
+      { value: '100,000+',  label: 'Total Cartons' }
     ],
     points: [
       'Backed by an experienced Liuyang fireworks team with more than 20 years of operating experience in the fireworks industry, and global sales experience across South America, Africa, Australia, Asia, Europe, and the United States.',
@@ -202,7 +202,10 @@ const SITE = {
     title: 'Dealer Locator',
     sub: 'Locate authorized dealers nearby for products and support',
     banners: [],                    // no banner on this page (add image links here to bring one back)
-    googleMapsKey: 'AIzaSyCCR2jcZB8NH-qC2wIzzczp5Q6K4fmK5dY',   // Google Maps key (restrict it to your website in Google Cloud). Blank = free OpenStreetMap map
+    googleMapsKey: 'AIzaSyCCR2jcZB8NH-qC2wIzzczp5Q6K4fmK5dY',
+    /* Map: 'osm' = free OpenStreetMap (works now, no setup). 'google' = Google Maps, only after "Maps JavaScript API"
+       and "Geocoding API" are turned on for the key above in Google Cloud. ZIP/city search works either way. */
+    mapProvider: 'osm',
     radii: [25, 50, 100, 200, 500, 1000], defaultRadius: 500,
     resultCounts: [10, 25, 50, 100], defaultResults: 25,
     types: ['Retail', 'Wholesale'],
@@ -265,7 +268,7 @@ const SITE = {
     { value: '10,000+', label: 'Active SKUs' },
     { value: '150+',    label: 'Partner factories' },
     { value: '20+',     label: 'Brands' },
-    { value: '1.4 & 1.3', label: 'Consumer to display' }
+    { value: '6,000+',  label: 'Containers' }
   ],
 
   /* Section headings and subtitles on the home page. */
@@ -405,13 +408,12 @@ input[type=search],select{width:100%;padding:11px 14px;border-radius:8px;border:
   background:#111;color:var(--text);font-family:inherit;font-size:1rem}
 /* desktop menu with drop-down */
 .desktop-nav .dd{position:relative}
-.desktop-nav .dd>a::after{content:" ▾";font-size:.7em}
 .desktop-nav .dd-menu{display:none;position:absolute;top:100%;left:-16px;padding-top:22px;min-width:270px}
 .desktop-nav .dd-menu div{background:#111;border:1px solid var(--line);border-radius:8px;padding:8px 0;box-shadow:0 12px 30px #0008}
 .desktop-nav .dd-menu a{display:block;padding:9px 18px;font-weight:400}
 .desktop-nav .dd:hover .dd-menu,.desktop-nav .dd:focus-within .dd-menu{display:block}
 .desktop-nav .hl,.drawer .hl{color:var(--accent)}
-@media(min-width:1180px){.desktop-nav{display:flex;font-size:.9rem;gap:18px}.menu-btn{display:none}}
+@media(min-width:1180px){.desktop-nav{display:flex;font-size:.9rem;gap:18px}}
 /* slide-in drawer (phones/tablets) */
 .drawer-bg{position:fixed;inset:0;background:#000a;z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(84vw,380px);background:#1b1b1b;z-index:91;transform:translateX(100%);
@@ -422,7 +424,7 @@ body.drawer-open{overflow:hidden}
 .drawer-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .drawer-head b{color:var(--accent);font-size:1.7rem;font-weight:800}
 .drawer nav{overflow-y:auto;flex:1}
-.drawer nav>a,.drawer .sub-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;padding:13px 2px;font-size:1.15rem;
+.drawer nav>a,.drawer .drawer-more>a,.drawer .sub-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;padding:13px 2px;font-size:1.15rem;
   border:none;border-bottom:1px solid var(--line);background:none;color:inherit;text-align:left;cursor:pointer}
 .drawer .sub-toggle::after{content:"⌄";font-size:1.2rem;transition:transform .2s}
 .drawer .sub.open .sub-toggle::after{transform:rotate(180deg)}
@@ -1220,6 +1222,86 @@ body.editing{color-scheme:dark}
 .arrivals .pslim .ph{background:#fff;color:#9a9a9a}
 /* phones: floating contact button becomes a small round icon */
 @media(max-width:760px){.float-mail{width:44px;padding:0!important;border-radius:50%!important}.float-mail .fm-txt{display:none}.floating{right:12px;bottom:16px}}
+
+/* Dealer Locator + Contact Us: same black / red / yellow branding as the home page */
+.brand-head{background:radial-gradient(ellipse 60% 90% at 50% 0%,rgba(215,25,31,.42),transparent 70%),radial-gradient(ellipse 45% 70% at 100% 100%,rgba(215,25,31,.22),transparent 70%),#0e0e0e;border-top:4px solid var(--accent);border-bottom:4px solid var(--hl);padding:4px 0 40px;color:#fff}
+.brand-head .crumbs{color:#bbb;padding-top:18px}
+.brand-head .crumbs a{color:#fff}
+.brand-head .section-title{color:#fff!important;margin-top:22px}
+.brand-head .section-title::after{content:"";display:block;width:64px;height:4px;background:var(--accent);margin:14px 0 0;border-radius:2px}
+.brand-head.center{text-align:center}
+.brand-head.center .crumbs{justify-content:flex-start}
+.brand-head.center .section-title::after{margin:14px auto 0}
+.brand-head .section-sub{color:#d8d8d8!important;max-width:640px;margin-top:14px}
+.brand-head.center .section-sub{margin-left:auto;margin-right:auto}
+.brand-body{padding-top:32px}
+/* dealer locator */
+.dl-panel{background:#fff;border:1px solid #e3e3e3;border-top:4px solid var(--accent);box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.dl-card{background:#fff;border:1px solid #e3e3e3;border-left:4px solid var(--ink,#111)}
+.dl-card:hover,.dl-card.on{border-color:var(--accent);border-left-color:var(--accent)}
+.dl-map{border:1px solid #e3e3e3;border-top:4px solid var(--hl)}
+/* contact: the email block sits in its own box; the form sits in a card */
+.ct-email{background:#fff;border:1px solid #e3e3e3;border-top:4px solid var(--accent);border-radius:var(--radius);box-shadow:0 8px 22px rgba(0,0,0,.07);max-width:460px;margin:0 auto 8px;padding:28px 24px 30px}
+.ct-wrap{border-top:none;padding-top:40px}
+.ct-form{background:#fff;border:1px solid #e3e3e3;border-top:4px solid var(--hl);border-radius:var(--radius);box-shadow:0 8px 22px rgba(0,0,0,.07);padding:26px 24px}
+@media(min-width:600px){.ct-form{padding:32px 34px}}
+/* product photos always show whole (no cropping) on a white background */
+.pcard .img{overflow:hidden}
+.pcard .img>img.contain{position:absolute;left:8px;top:8px;width:calc(100% - 16px);height:calc(100% - 16px)}
+.pslim .img>img.contain{position:absolute;inset:0;width:100%;height:100%}
+.pcard .img>img.contain,.pslim .img>img.contain,.na-item .t,.fav-row .thumb{background:#fff!important}
+.pslim .img{background:#fff;border:1px solid #e6e6e6}
+/* hamburger drawer: brand colors */
+.drawer{border-left:4px solid var(--accent)}
+.drawer-head b{letter-spacing:.12em}
+.drawer-more{margin-top:10px;padding-top:10px;border-top:2px solid var(--hl)}
+.menu-btn{display:grid}
+/* ---- Oct 10 round: home page polish ---- */
+/* hero: "Many brands · One container" larger (still yellow) */
+.hero .eyebrow{font-size:clamp(1.15rem,2.9vw,1.7rem)!important;letter-spacing:.14em;font-weight:700;margin-bottom:6px}
+@media(max-width:600px){.hero .eyebrow{font-size:1.02rem!important;letter-spacing:.08em}}
+/* red buttons go black on hover (same idea as "Find a Retailer") */
+.btn.solid:hover,.hero .btn.solid:hover{background:#111!important;border-color:#111!important;color:#fff!important}
+/* New Arrivals: clean white section, bigger "Fresh for the 2027 season" label */
+.arrivals{background:#fff!important;border-top:3px solid var(--accent)!important;border-bottom:3px solid var(--hl)!important}
+.arrivals .eyebrow{font-size:clamp(1.05rem,2.8vw,1.4rem)!important;padding:7px 16px!important}
+/* New Arrivals items without a card: just the product */
+.arrivals .pslim .img{background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0}
+.arrivals .pslim:hover .img{transform:translateY(-4px) scale(1.02);box-shadow:none!important}
+.arrivals .pslim .img>img.contain{background:transparent!important}
+.arrivals .pslim h3{text-align:center}.arrivals .pslim .cat{text-align:center;display:block}
+/* NEW! ribbon: brighter, eye-catching */
+.pcard .img>.ribbon,.pslim .img .ribbon{background:#ffea00!important;color:#d7191f!important;font-weight:800!important;letter-spacing:.04em;box-shadow:0 2px 8px rgba(0,0,0,.28)}
+/* Contact: form right under the header, in a gray box with brand accents */
+.ct-wrap{padding-top:8px!important;padding-bottom:64px}
+.ct-form{background:#ececec!important;border:1px solid #dcdcdc!important;border-top:5px solid var(--accent)!important;border-radius:var(--radius);box-shadow:0 10px 26px rgba(0,0,0,.08)}
+.ct-form .fld label{font-weight:600;color:#222}
+.ct-form .fld input,.ct-form .fld textarea{background:#fff;border:1px solid #cfcfcf;border-radius:8px;padding:11px 12px}
+.ct-form .fld input:focus,.ct-form .fld textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(215,25,31,.15)}
+.ct-intro{align-self:start}
+.ct-intro h2{position:relative}
+.ct-intro h2::after{content:"";display:block;width:56px;height:4px;background:var(--hl);border-radius:2px;margin-top:12px}
+.ct-mail{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:12px 16px;background:#111;color:#fff;border-radius:10px;border-left:4px solid var(--accent)}
+.ct-mail svg{width:22px;height:22px;color:var(--hl);flex:none}
+.ct-mail small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#bbb}
+.ct-mail:hover{background:var(--accent)}
+.ct-mail:hover svg{color:#fff}
+/* About: bigger "About PyroBuy", value-added section on the left */
+.ab-hero .ab-eye{font-size:clamp(1.05rem,2.6vw,1.5rem)!important;letter-spacing:.16em;font-weight:700;margin-top:0}
+.ab-custom.no-pic{display:block!important;max-width:var(--max)!important}
+.ab-custom.no-pic>div{max-width:760px;margin:0!important}
+/* Brands page: bigger logos */
+.bcard .blogo{height:150px!important}
+.bcard .blogo img{max-height:140px!important;max-width:92%!important}
+@media(min-width:760px){.bcard .blogo{height:200px!important}.bcard .blogo img{max-height:190px!important}}
+/* NEW! as a stand-alone badge where products have no card (not a corner ribbon, so nothing gets clipped) */
+.pcard .img>.ribbon,.pslim .img .ribbon{transform:none!important;top:10px!important;left:10px!important;right:auto!important;padding:5px 12px!important;border-radius:999px!important;font-size:.78rem!important;line-height:1;z-index:2;width:auto}
+.arrivals .pslim .img .ribbon{top:4px!important;left:4px!important}
+/* Every product photo sits in a fixed-size box and is scaled to fit inside it (never cropped, never stretches the page) */
+.item-photo{min-height:0}
+.item-photo>img.contain{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.pcard .img,.pslim .img,.item-photo{min-height:0;contain:size layout}
+.pcard .img img,.pslim .img img,.item-photo img,.na-item .t img,.fav-row .thumb img{object-fit:contain!important;max-width:100%;max-height:100%}
 /* the site editor keeps its own dark theme */
 body.editing{--bg:#161616;--bg-alt:#1f1f1f;--card:#0b0b0b;--text:#fff;--muted:#b5b5b5;--line:#333;background:#161616;color:#fff}
 body.editing .chip,body.editing .pager button{background:#111;color:#ddd;border-color:#333}
@@ -1313,6 +1395,8 @@ body.editing input[type=search],body.editing select{background-color:#111;color:
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm = s => String(s || '').toLowerCase().trim();
+/* numbers of 4+ digits get commas: 1000 → 1,000, 100000+ → 100,000+ */
+const numFmt = v => String(v == null ? '' : v).replace(/\d{4,}(?:\.\d+)?/g, m => /\./.test(m) ? m : Number(m).toLocaleString('en-US'));
 const img = (src, label, cls) => src ? `<img class="${cls || 'cover'}" src="${esc(src)}" alt="${esc(label)}" loading="lazy" onerror="imgFail(this)">` : `<div class="ph">${esc(label)}</div>`;
 /* If a picture isn't in its images/... folder, try the same file name next to index.html
    (some uploads, e.g. GitHub's web uploader, drop the folders). Only then show the empty box. */
@@ -1361,8 +1445,13 @@ function applySettings() {
   const lnk = m => `<a href="${esc(m.link || '#')}"${m.highlight ? ' class="hl"' : ''}${/^https?:/.test(m.link || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(m.label)}</a>`;
   $('#desktopNav').innerHTML = SITE.menu.filter(m => m.desktop !== false).map(m => m.children
     ? `<div class="dd">${lnk(m)}<div class="dd-menu"><div>${m.children.map(lnk).join('')}</div></div></div>` : lnk(m)).join('');
-  $('#drawerNav').innerHTML = SITE.menu.map(m => m.children
-    ? `<div class="sub"><button class="sub-toggle">${esc(m.label)}</button><div class="sub-links">${m.children.map(lnk).join('')}</div></div>` : lnk(m)).join('');
+  // Drawer (hamburger, all screen sizes): the top menu plus the footer links that aren't in it
+  const sub = (label, items) => `<div class="sub"><button class="sub-toggle">${esc(label)}</button><div class="sub-links">${items.map(lnk).join('')}</div></div>`;
+  const brandLinks = [...document.querySelectorAll('footer a[href^="#/products?brand="]')].map(a => ({ label: a.textContent.trim(), link: a.getAttribute('href') }))
+    .concat([{ label: 'All brands', link: '#/brands' }]);
+  $('#drawerNav').innerHTML = SITE.menu.map(m => m.children ? sub(m.label, m.children) : lnk(m)).join('')
+    + '<div class="drawer-more">' + sub('Our Brands', brandLinks)
+    + lnk({ label: 'Company Profile', link: '#/about' }) + (SITE.menu.some(m => m.link === '#/favorites') ? '' : lnk({ label: 'Favorites', link: '#/favorites' })) + '</div>';
 }
 
 /* ============================== catalog data ============================== */
@@ -1460,12 +1549,16 @@ async function loadNewPlaylist() {
   } catch (e) { console.warn('New-items playlist not available:', e.message); }
   PLAYLIST_NEW = found;
 }
+/* A random order picked once per page load, so New Arrivals and the Syko row show a different mix on every visit. */
+const RND = new Map();
+const rnd = it => { if (!RND.has(it)) RND.set(it, Math.random()); return RND.get(it); };
+const shuffled = list => list.slice().sort((a, b) => rnd(a) - rnd(b));
 function newArrivals() {
   const listed = SITE.newArrivals.map(n => BY_NO[norm(n)]).filter(Boolean).concat(PLAYLIST_NEW.filter(i => !SITE.newArrivals.some(n => norm(n) === norm(i.no)))).filter(isShowcase);
   const flagged = ITEMS.filter(i => i.isNew && isShowcase(i) && !listed.includes(i));
   let out = listed.concat(flagged);
-  if (!out.length) out = ITEMS.filter(i => i.published && isShowcase(i)).sort((a, b) => String(b.published).localeCompare(String(a.published)));
-  return out.slice(0, SITE.newArrivalsMax);
+  if (!out.length) out = ITEMS.filter(i => i.published && isShowcase(i)).sort((a, b) => String(b.published).localeCompare(String(a.published))).slice(0, SITE.newArrivalsMax * 3);
+  return shuffled(out).slice(0, SITE.newArrivalsMax);
 }
 const isNewItem = it => it.isNew || PLAYLIST_NEW.includes(it) || SITE.newArrivals.some(n => norm(n) === norm(it.no));
 
@@ -1487,14 +1580,14 @@ const favBtn = no => `<button class="fav${isFav(no) ? ' on' : ''}" data-fav="${e
 /* Slim card: no box, just the photo, name and product category (used in New Arrivals and the Syko row). */
 function slimCard(it) {
   return `<article class="pslim" data-item="${esc(it.no)}">
-    <div class="img">${img(it.photo, it.name)}${isNewItem(it) ? '<span class="ribbon">NEW!</span>' : ''}${favBtn(it.no)}</div>
+    <div class="img">${img(it.photo, it.name, 'contain')}${isNewItem(it) ? '<span class="ribbon">NEW!</span>' : ''}${favBtn(it.no)}</div>
     <h3>${esc(it.name)}</h3>
     ${it.category ? `<span class="cat">${esc(it.category)}</span>` : ''}
   </article>`;
 }
 function card(it) {
   return `<article class="pcard" data-item="${esc(it.no)}">
-    <div class="img">${img(it.photo, it.name)}${isNewItem(it) ? '<span class="ribbon">NEW!</span>' : ''}${it.ytId ? '<span class="play-tag">▶ Video</span>' : ''}</div>
+    <div class="img">${img(it.photo, it.name, 'contain')}${isNewItem(it) ? '<span class="ribbon">NEW!</span>' : ''}${it.ytId ? '<span class="play-tag">▶ Video</span>' : ''}</div>
     <div class="pinfo">
       <h3>${esc(it.name)}</h3>
       <div class="prow"><span>${esc(it.no)}</span>${favBtn(it.no)}</div>
@@ -1589,7 +1682,7 @@ function renderHome() {
   </section>
 
   <div class="stats"><div class="container stats-grid">
-    ${SITE.stats.map(st => `<div class="stat"><b>${esc(st.value)}</b><span>${esc(st.label)}</span></div>`).join('')}
+    ${SITE.stats.map(st => `<div class="stat"><b>${esc(numFmt(st.value))}</b><span>${esc(st.label)}</span></div>`).join('')}
   </div></div>
 
   <section>
@@ -1652,7 +1745,7 @@ function renderHome() {
 }
 function featureSection() {
   const F = SITE.feature; if (!F || !F.show) return '';
-  const items = ITEMS.filter(i => isShowcase(i) && inBrand(i, F.brand)).slice(0, 12);
+  const items = shuffled(ITEMS.filter(i => isShowcase(i) && inBrand(i, F.brand))).slice(0, 12);
   const link = brandLink(F.brand);
   return `<section class="feature" style="--fc:${esc(F.color)}"><div class="feature-grid">
     <div class="feature-media">${img(F.image, F.title + ' image')}${F.logo ? `<img class="feature-logo" src="${esc(F.logo)}" alt="${esc(F.title)}">` : ''}</div>
@@ -1702,7 +1795,7 @@ function renderProducts(params) {
     ${arrivals.length ? `<div class="na-strip">
       <div class="na-head"><h2><span>★</span> ${esc(SITE.sections.arrivals.title)}</h2>
         <div style="display:flex;gap:6px"><button class="round" type="button" data-na="-1" aria-label="Previous">‹</button><button class="round" type="button" data-na="1" aria-label="Next">›</button></div></div>
-      <div class="na-items" id="naItems">${arrivals.map(it => `<div class="na-item" data-item="${esc(it.no)}"><div class="t">${img(it.photo, '')}</div><div><b>${esc(it.name)}</b><small>${esc(it.no)}</small></div></div>`).join('')}</div>
+      <div class="na-items" id="naItems">${arrivals.map(it => `<div class="na-item" data-item="${esc(it.no)}"><div class="t">${img(it.photo, '', 'contain')}</div><div><b>${esc(it.name)}</b><small>${esc(it.no)}</small></div></div>`).join('')}</div>
     </div>` : ''}
     <form class="filter-box" id="pform">
       <div class="search-row">
@@ -1783,6 +1876,11 @@ function filtered() {
     (!P.fresh || isNewItem(i)) && (!P.video || i.ytId) && words.every(w => i.text.includes(w)));
   if (P.sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
   else if (P.sort === 'new') list.sort((a, b) => String(b.published).localeCompare(String(a.published)));
+  else if (P.brand) {
+    // Brand pages: 200 g and 500 g cakes first, then everything else (nothing is hidden)
+    const rank = i => /\b(200|500)\s*(g|gram)/.test((i.category + ' ' + i.name + ' ' + (i.extra['Size'] || '')).toLowerCase()) ? 0 : 1;
+    list.sort((a, b) => rank(a) - rank(b) || a.no.localeCompare(b.no, undefined, { numeric: true }));
+  }
   else list.sort((a, b) => a.no.localeCompare(b.no, undefined, { numeric: true }));
   return list;
 }
@@ -1798,7 +1896,7 @@ function drawProducts() {
   const list = filtered(), pages = Math.max(1, Math.ceil(list.length / P.per));
   if (P.page > pages) P.page = pages;
   const from = (P.page - 1) * P.per;
-  $('#pcount').textContent = list.length ? `Showing ${(from + 1).toLocaleString()}–${Math.min(from + P.per, list.length).toLocaleString()} of ${list.length.toLocaleString()} items` : '0 items';
+  $('#pcount').textContent = list.length ? `Showing ${(from + 1).toLocaleString('en-US')}–${Math.min(from + P.per, list.length).toLocaleString('en-US')} of ${list.length.toLocaleString('en-US')} items` : '0 items';
   $('#pgrid').innerHTML = list.slice(from, from + P.per).map(card).join('');
   $('#pempty').innerHTML = list.length ? '' : '<p class="empty">No items match. Try a different search or clear the filters.</p>';
   $('#ppager').innerHTML = pages > 1 ? pager(P.page, pages) : '';
@@ -1881,7 +1979,7 @@ function renderFavorites() {
     </div>
     ${favView === 'grid' ? `<div class="grid">${items.map(card).join('')}</div>` :
       `<div class="fav-list">${items.map(it => `<div class="fav-row" data-item="${esc(it.no)}">
-        <div class="thumb">${img(it.photo, '')}</div>
+        <div class="thumb">${img(it.photo, '', 'contain')}</div>
         <div><h3>${esc(it.name)}</h3><div class="meta">${esc(it.no)} · ${esc(it.category)}${it.brand ? ' · ' + esc(it.brand) : ''}${it.ytId ? ' · ▶ Video' : ''}</div></div>
         ${favBtn(it.no)}</div>`).join('')}</div>`}`
     : `<div class="empty"><a class="btn solid" href="#/products">Browse products</a></div>`}
@@ -1910,7 +2008,7 @@ function renderBrands() {
       <div class="view">View products →</div>
       <h3>${esc(b.name)}</h3>
       ${b.desc ? `<p>${esc(b.desc)}</p>` : ''}
-      ${n ? `<div class="count">${n.toLocaleString()} item${n === 1 ? '' : 's'}</div>` : ''}
+      ${n ? `<div class="count">${n.toLocaleString('en-US')} item${n === 1 ? '' : 's'}</div>` : ''}
     </a>`; };
   $('#app').innerHTML = `<section style="padding-top:44px"><div class="container">
     <h1 class="section-title">Our Brands</h1>
@@ -2038,7 +2136,7 @@ function drawMarketing() {
   const from = (M.page - 1) * M.per;
   $('#mchips').innerHTML = [['q', M.q && '“' + M.q + '”'], ['brand', M.brand], ['type', M.type]].filter(a => a[1])
     .map(a => `<button class="chip rm" type="button" data-clear="${a[0]}">${esc(a[1])} ×</button>`).join('');
-  $('#mcount').textContent = list.length ? `Showing ${from + 1}–${Math.min(from + M.per, list.length)} of ${list.length} files` : '0 files';
+  $('#mcount').textContent = list.length ? `Showing ${(from + 1).toLocaleString('en-US')}–${Math.min(from + M.per, list.length).toLocaleString('en-US')} of ${list.length.toLocaleString('en-US')} files` : '0 files';
   const all = SITE.marketing.assets;
   $('#mlist').innerHTML = list.length ? list.slice(from, from + M.per).map(a => assetCard(a, all.indexOf(a))).join('')
     : '<p class="empty">No files match. Try a different search or clear the filters.</p>';
@@ -2054,8 +2152,7 @@ function renderAbout() {
   <section class="ab-hero" id="abHero" style="padding:0">
     ${slides.map((src, i) => `<div class="slide${i ? '' : ' on'}">${img(src, 'About photo ' + (i + 1) + ' — add links in SITE.about.carousel')}</div>`).join('')}
     <div class="container">
-      <div class="crumbs dark" style="color:#ccc;padding-top:0"><a href="#/">⌂ Home</a><span>›</span><span>About</span></div>
-      <div class="eyebrow" style="margin-top:18px">${esc(A.eyebrow)}</div>
+      <div class="eyebrow ab-eye">${esc(A.eyebrow)}</div>
       <h1 class="f-num">${A.headline.map(h => `<span>${esc(h)}</span>`).join('')}</h1>
       <p>${esc(A.lede)}</p>
     </div>
@@ -2063,7 +2160,7 @@ function renderAbout() {
   </section>
 
   <div class="container"><div class="ab-stats">
-    ${A.stats.map(st => `<div class="ab-stat"><b class="f-num">${esc(st.value)}</b><span>${esc(st.label)}</span></div>`).join('')}
+    ${A.stats.map(st => `<div class="ab-stat"><b class="f-num">${esc(numFmt(st.value))}</b><span>${esc(st.label)}</span></div>`).join('')}
   </div></div>
 
   <section class="ab-sec"><div class="container">
@@ -2120,7 +2217,7 @@ const MAP = {
   kind: '', map: null, markers: [], user: null, cluster: null, info: null,
   async init(el) {
     const key = SITE.dealers.googleMapsKey;
-    if (key) {
+    if (key && SITE.dealers.mapProvider === 'google') {
       if (!window.google || !google.maps) await new Promise((ok, bad) => { window.__gmReady = ok;
         loadScript('https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(key) + '&callback=__gmReady').catch(bad); });
       try { await loadScript('https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js'); } catch (e) {}
@@ -2138,14 +2235,14 @@ const MAP = {
       try { await loadScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js'); } catch (e) {}
       this.kind = 'leaflet';
       this.map = L.map(el, { scrollWheelZoom: false }).setView([39.5, -98.35], 4);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19, subdomains: 'abcd',
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19, subdomains: 'abcd',
         attribution: '&copy; OpenStreetMap contributors &copy; CARTO' }).addTo(this.map);
     }
   },
   popup(d) { return `<b>${esc(d.name)}</b><br>${esc(dealerAddr(d))}${d.phone ? `<br>${esc(d.phone)}` : ''}<br><a href="${dirUrl(d)}" target="_blank" rel="noopener">Get directions ↗</a>`; },
   setDealers(list, onPick) {
     this.clear();
-    const pts = list.filter(d => d.pos !== 'zip' && isFinite(d.lat) && isFinite(d.lng) && d.lat !== '' && d.lng !== '');
+    const pts = list.filter(d => d.lat !== '' && d.lng !== '' && d.lat != null && isFinite(d.lat) && isFinite(d.lng));
     if (this.kind === 'google') {
       this.markers = pts.map(d => { const m = new google.maps.Marker({ position: { lat: +d.lat, lng: +d.lng }, title: d.name,
         icon: { url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(PIN), scaledSize: new google.maps.Size(30, 40), anchor: new google.maps.Point(15, 39) } });
@@ -2189,9 +2286,11 @@ function renderDealers() {
   DL.radius = DL.radius || C.defaultRadius; DL.count = DL.count || C.defaultResults;
   const GEO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
   $('#app').innerHTML = `${(C.banners || []).some(Boolean) ? bannerSlider(C.banners.filter(Boolean), 'Dealer banner') : ''}
-  <div class="container">
-    <div class="crumbs dark"><a href="#/">⌂ Home</a><span>›</span><span>${esc(C.title)}</span></div>
-    <div class="dl-head"><h1 class="section-title">${esc(C.title)}</h1><p class="section-sub">${esc(C.sub)}</p></div>
+  <section class="brand-head"><div class="container">
+    <div class="crumbs"><a href="#/">⌂ Home</a><span>›</span><span>${esc(C.title)}</span></div>
+    <h1 class="section-title">${esc(C.title)}</h1><p class="section-sub">${esc(C.sub)}</p>
+  </div></section>
+  <div class="container brand-body">
     <div class="dl-wrap">
       <div class="dl-side">
         <form class="dl-panel" id="dlForm">
@@ -2199,7 +2298,7 @@ function renderDealers() {
             <div class="dl-loc"><input type="search" id="dlLoc" placeholder="ZIP code, city or address" autocomplete="postal-code" value="${esc(DL.label)}">
               <button class="btn-geo" type="button" id="dlGeo">${GEO}Use my location</button></div></div>
           <div class="dl-row">
-            <div><label for="dlRad">Search radius</label><select id="dlRad">${C.radii.map(r => `<option value="${r}"${r === DL.radius ? ' selected' : ''}>${r} mi</option>`).join('')}</select></div>
+            <div><label for="dlRad">Search radius</label><select id="dlRad">${C.radii.map(r => `<option value="${r}"${r === DL.radius ? ' selected' : ''}>${numFmt(r)} mi</option>`).join('')}</select></div>
             <div><label for="dlCnt">Results</label><select id="dlCnt">${C.resultCounts.map(r => `<option${r === DL.count ? ' selected' : ''}>${r}</option>`).join('')}</select></div>
           </div>
           <div><label>Show</label><div class="dl-types">${C.types.map((t, i) => `<label><input type="checkbox" value="${esc(t)}" id="dlT${i}"${DL.types.includes(t) ? ' checked' : ''}> ${esc((C.typeLabels || {})[t] || t)}</label>`).join('')}</div></div>
@@ -2231,43 +2330,51 @@ function renderDealers() {
   document.querySelectorAll('.dl-types input').forEach(i => i.onchange = refresh);
   let nt; $('#dlName').oninput = e => { clearTimeout(nt); nt = setTimeout(() => { DL.name = e.target.value.trim(); refresh(); }, 250); };
   $('#dlList').onclick = e => { if (e.target.closest('a')) return; const c = e.target.closest('[data-dl]'); if (!c) return;
-    const d = DL.results[+c.dataset.dl]; pickDealer(d); if (d.pos === 'zip' || d.lat === '' || d.lat == null) return; MAP.open(d); if (innerWidth < 1000) $('#dlMap').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+    const d = DL.results[+c.dataset.dl]; pickDealer(d); if (d.lat === '' || d.lat == null) return; MAP.open(d); if (innerWidth < 1000) $('#dlMap').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
   drawDealerList();
   MAP.map = null; MAP.markers = []; MAP.user = null; MAP.cluster = null;
   MAP.init($('#dlMap')).then(() => { $('#dlMap .map-off') && $('#dlMap .map-off').remove(); DL.origin ? runDealerSearch() : showAllDealers(); })
-    .catch(() => { $('#dlMap').innerHTML = '<div class="map-off">The map couldn\'t load here. The dealer list still works. On the live site the map appears in this space.</div>'; MAP.map = null; });
+    .catch(() => { $('#dlMap').innerHTML = '<div class="map-off">The map couldn\'t load right now. The dealer list below still works.</div>'; MAP.map = null; });
 }
 async function geocode(q) {
   if (MAP.kind === 'google' && window.google) {
-    const r = await new google.maps.Geocoder().geocode({ address: q, region: 'us' });
-    const l = r.results[0].geometry.location; return { lat: l.lat(), lng: l.lng() };
+    try { const r = await new google.maps.Geocoder().geocode({ address: q, region: 'us' });
+      const l = r.results[0].geometry.location; return { lat: l.lat(), lng: l.lng() }; } catch (e) { /* fall through to the free lookups */ }
+  }
+  // US ZIP code: free ZIP lookup first (fast and exact for ZIPs); a dealer in that ZIP is the backup answer
+  const zip = (q.match(/^\s*(\d{5})(?:-\d{4})?\s*$/) || [])[1];
+  if (zip) {
+    try { const z = await fetch('https://api.zippopotam.us/us/' + zip); if (z.ok) { const j = await z.json(); const pl = (j.places || [])[0];
+      if (pl) return { lat: +pl.latitude, lng: +pl.longitude }; } } catch (e) {}
+    const own = (SITE.dealers.list || []).find(d => String(d.zip || '').slice(0, 5) === zip && d.lat !== '' && d.lat != null && isFinite(d.lat));
+    if (own) return { lat: +own.lat, lng: +own.lng };
   }
   const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us,ca&q=' + encodeURIComponent(q), { headers: { Accept: 'application/json' } });
   const j = await r.json(); if (!j[0]) throw new Error('not found'); return { lat: +j[0].lat, lng: +j[0].lon };
 }
 const dealerPool = () => { const w = norm(DL.name || '').split(/\s+/).filter(Boolean);
   return (SITE.dealers.list || []).filter(d => (!DL.types.length || DL.types.includes(d.type)) && w.every(x => norm(d.name + ' ' + (d.city || '')).includes(x))); };
-function showAllDealers() { const pool = dealerPool(); MAP.setDealers(pool, pickDealer); MAP.fit(pool.filter(d => d.pos !== 'zip' && d.lat !== '' && isFinite(d.lat)).map(d => ({ lat: +d.lat, lng: +d.lng }))); }
+function showAllDealers() { const pool = dealerPool(); MAP.setDealers(pool, pickDealer); MAP.fit(pool.filter(d => d.lat !== '' && d.lat != null && isFinite(d.lat)).map(d => ({ lat: +d.lat, lng: +d.lng }))); }
 function runDealerSearch() {
   const pool = dealerPool().filter(d => d.lat !== '' && d.lat != null && isFinite(d.lat) && isFinite(d.lng)).map(d => Object.assign({}, d, { dist: milesBetween(DL.origin, { lat: +d.lat, lng: +d.lng }) })).sort((a, b) => a.dist - b.dist);
   const inside = pool.filter(d => d.dist <= DL.radius).slice(0, DL.count);
   DL.results = inside.length ? inside : pool.slice(0, 3); DL.outside = !inside.length && pool.length > 0;
   drawDealerList();
   MAP.setDealers(DL.results, pickDealer); MAP.setUser(DL.origin);
-  MAP.fit([DL.origin].concat(DL.results.filter(d => d.pos !== 'zip').map(d => ({ lat: +d.lat, lng: +d.lng }))));
+  MAP.fit([DL.origin].concat(DL.results.map(d => ({ lat: +d.lat, lng: +d.lng }))));
 }
 function pickDealer(d) { document.querySelectorAll('.dl-card').forEach(c => c.classList.toggle('on', DL.results[+c.dataset.dl] && DL.results[+c.dataset.dl].name === d.name && DL.results[+c.dataset.dl].lat === d.lat));
   const on = document.querySelector('.dl-card.on'); if (on && innerWidth >= 1000) on.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
 function drawDealerList() {
   let head = '';
   if (!DL.origin) { DL.results = dealerPool().slice().sort((a, b) => a.name.localeCompare(b.name));
-    head = `<p class="dl-sub">Enter your ZIP code or tap <b>Use my location</b> to see the dealers closest to you. ${DL.results.length.toLocaleString()} dealers listed.</p>`; }
-  else if (DL.outside) head = `<p class="dl-sub">No dealers within ${DL.radius} mi. These are the closest:</p>`;
-  else head = `<p class="dl-sub">${DL.results.length} dealer${DL.results.length === 1 ? '' : 's'} within ${DL.radius} mi, closest first.</p>`;
+    head = `<p class="dl-sub">Enter your ZIP code or tap <b>Use my location</b> to see the dealers closest to you. ${DL.results.length.toLocaleString('en-US')} dealers listed.</p>`; }
+  else if (DL.outside) head = `<p class="dl-sub">No dealers within ${numFmt(DL.radius)} mi. These are the closest:</p>`;
+  else head = `<p class="dl-sub">${DL.results.length.toLocaleString('en-US')} dealer${DL.results.length === 1 ? '' : 's'} within ${numFmt(DL.radius)} mi, closest first.</p>`;
   const list = DL.origin ? DL.results : DL.results.slice(0, 50);
   $('#dlList').innerHTML = head + (list.length ? list.map((d, i) => `<article class="dl-card" data-dl="${i}">
       <h3>${esc(d.name)}${d.type === 'Wholesale' ? '<span class="tag hl">Wholesale</span>' : ''}${d.ships ? '<span class="tag">Ships to you</span>' : ''}</h3>
-      ${d.dist != null && DL.origin ? `<div class="dist">${d.pos === 'zip' ? '~' : ''}${d.dist < 10 ? d.dist.toFixed(1) : Math.round(d.dist).toLocaleString()}<small>miles</small></div>` : '<div></div>'}
+      ${d.dist != null && DL.origin ? `<div class="dist">${d.pos === 'zip' ? '~' : ''}${d.dist < 10 ? d.dist.toFixed(1) : Math.round(d.dist).toLocaleString('en-US')}<small>miles</small></div>` : '<div></div>'}
       <div class="addr">${esc(dealerAddr(d))}</div>
       ${d.phone || d.email ? `<div class="tel">${[d.phone && esc(d.phone), d.email && `<a href="mailto:${esc(d.email)}">${esc(d.email)}</a>`].filter(Boolean).join(' · ')}</div>` : ''}
       <div class="acts"><a class="btn sm" href="${dirUrl(d)}" target="_blank" rel="noopener">Directions ↗</a>
@@ -2367,15 +2474,16 @@ function renderContact() {
     ${type === 'area' ? `<textarea id="c_${id}" name="${id}" placeholder="${esc(ph)}" maxlength="4000"${req ? ' required' : ''}></textarea>`
       : `<input id="c_${id}" name="${id}" type="${type || 'text'}" placeholder="${esc(ph)}" maxlength="200"${req ? ' required' : ''}${extra || ''}>`}<div class="err"></div></div>`;
   $('#app').innerHTML = `${bannerSlider(C.banners, 'Contact banner')}
-  <div class="container">
-    <div class="crumbs dark"><a href="#/">⌂ Home</a><span>›</span><span>${esc(C.title)}</span></div>
-    <div class="page-head center" style="padding-top:16px"><h1 class="section-title">${esc(C.title)}</h1><p class="section-sub" style="max-width:640px;margin-left:auto;margin-right:auto">${esc(C.sub)}</p></div>
-    <div class="ct-email"><div class="ic">${MAIL}</div><b>Email</b><span class="addr">${esc(SITE.email)}</span>
-      <button class="btn sm" type="button" id="ctCopy">Copy email</button></div>
+  <section class="brand-head center"><div class="container">
+    <div class="crumbs"><a href="#/">⌂ Home</a><span>›</span><span>${esc(C.title)}</span></div>
+    <h1 class="section-title">${esc(C.title)}</h1><p class="section-sub">${esc(C.sub)}</p>
+  </div></section>
+  <div class="container brand-body">
     <div class="ct-wrap">
       <div class="ct-intro">
         <svg class="bubble" viewBox="0 0 24 24" fill="currentColor"><path d="M3 4h13a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3v-3H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M20 8h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-1v3l-4-3h-5a2 2 0 0 1-2-2v-1h7a3 3 0 0 0 3-3z" opacity=".7"/></svg>
         <p class="e">${esc(C.formEyebrow)}</p><h2>${esc(C.formTitle)}</h2><p class="t">${esc(C.formText)}</p>
+        <a class="ct-mail" href="mailto:${esc(SITE.email)}">${MAIL}<span><small>Email</small>${esc(SITE.email)}</span></a>
       </div>
       <form class="ct-form" id="ctForm" novalidate>
         <datalist id="bizTypes">${C.businessTypes.map(t => `<option value="${esc(t)}">`).join('')}</datalist>
@@ -2390,7 +2498,6 @@ function renderContact() {
     </div>
   </div>`;
   startBanner();
-  $('#ctCopy').onclick = () => navigator.clipboard.writeText(SITE.email).then(() => toast('Email copied'), () => toast(SITE.email));
   $('#ctForm').onsubmit = async e => {
     e.preventDefault();
     const v = id => $('#c_' + id).value.trim(), data = {};
@@ -2449,6 +2556,21 @@ $('#searchForm').onsubmit = e => { e.preventDefault(); const q = $('#headerSearc
   location.hash = '#/products' + (q ? '?q=' + encodeURIComponent(q) : ''); if (route().page === 'products') render(); };
 $('#toTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 window.addEventListener('hashchange', render);
+/* Home rows (New Arrivals, Syko) slowly move on their own: one product every few seconds,
+   back to the start at the end. Pauses while the mouse is over the row, a finger is on it,
+   it's off screen, or the visitor's device asks for reduced motion. */
+const AUTO_MS = 3500;
+setInterval(() => {
+  if (document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('#arrivals, .feature-items').forEach(row => {
+    if (row.matches(':hover') || row.dataset.touch) return;
+    const r = row.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight || row.scrollWidth <= row.clientWidth + 8) return;
+    const f = row.firstElementChild, step = (f ? f.offsetWidth : 220) + parseFloat(getComputedStyle(row).columnGap || 16);
+    if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 8) row.scrollTo({ left: 0, behavior: 'smooth' });
+    else row.scrollBy({ left: step, behavior: 'smooth' });
+  });
+}, AUTO_MS);
+document.addEventListener('touchstart', e => { const r = e.target.closest && e.target.closest('#arrivals, .feature-items'); if (r) { r.dataset.touch = '1'; clearTimeout(r.__t); r.__t = setTimeout(() => delete r.dataset.touch, 8000); } }, { passive: true });
 /* hide a carousel arrow when there's nothing more to scroll that way */
 function syncArrows() {
   const c = document.getElementById('arrivals'); if (!c) return;
@@ -2715,8 +2837,8 @@ function edDealers() {
       <div class="ed-row"><label class="btn sm">Choose file<input type="file" id="edDFile" accept=".csv,.xlsx,.xls" hidden></label>
         <label class="ed-chk"><input type="radio" name="edDMode" value="replace" checked> Replace the list</label><label class="ed-chk"><input type="radio" name="edDMode" value="append"> Add to the list</label></div>
       <p class="dl-msg" id="edDMsg"></p></fieldset>
-    <fieldset class="ed-group"><legend>${list.length.toLocaleString()} dealers</legend>
-      ${missing || approx ? `<p class="ed-warn">${missing ? `${missing.toLocaleString()} dealer${missing === 1 ? ' has' : 's have'} no map position and won't show on the map. ` : ''}${approx ? `${approx.toLocaleString()} ${approx === 1 ? 'is' : 'are'} confirmed by ZIP code only (no map pin yet). ` : ''}<button type="button" class="btn sm" id="edGeo">Find exact map positions</button></p>` : ''}
+    <fieldset class="ed-group"><legend>${list.length.toLocaleString('en-US')} dealers</legend>
+      ${missing || approx ? `<p class="ed-warn">${missing ? `${missing.toLocaleString('en-US')} dealer${missing === 1 ? ' has' : 's have'} no map position and won't show on the map. ` : ''}${approx ? `${approx.toLocaleString('en-US')} ${approx === 1 ? 'is' : 'are'} confirmed by ZIP code only (no map pin yet). ` : ''}<button type="button" class="btn sm" id="edGeo">Find exact map positions</button></p>` : ''}
       <div class="ed-row"><input type="search" id="edDQ" placeholder="Search name, city, state, ZIP" value="${esc(ED.dQuery)}"><button type="button" class="btn sm" id="edDAdd">+ Add dealer</button><button type="button" class="btn sm" id="edDExp">Export CSV</button></div>
       <div class="ed-table">${idx.slice(ED.dPage * per, ED.dPage * per + per).map(i => { const d = list[i], ok = isFinite(parseFloat(d.lat)) && isFinite(parseFloat(d.lng));
         const st = !ok ? ['bad', '⚠ no position'] : d.pos === 'zip' ? ['mid', '≈ ZIP only'] : ['ok', '✓ on map'];
@@ -2766,7 +2888,7 @@ async function edImportDealers(file) {
     const mode = document.querySelector('input[name=edDMode]:checked').value;
     ED.W.dealers.list = mode === 'append' ? (ED.W.dealers.list || []).concat(out) : out;
     edMark('dealers.list'); ED.dPage = 0; ED.dEdit = -1; edDealers();
-    $('#edDMsg').textContent = `Imported ${out.length.toLocaleString()} dealers. Click Save changes to publish them.`;
+    $('#edDMsg').textContent = `Imported ${out.length.toLocaleString('en-US')} dealers. Click Save changes to publish them.`;
   } catch (e) { msg.textContent = 'Import failed: ' + e.message; msg.classList.add('err'); }
 }
 async function edGeocodeMissing() {
@@ -2799,7 +2921,7 @@ async function edMessages() {
   try {
     const rows = await edFetch('/rest/v1/site_messages?select=*&order=created_at.desc&limit=300');
     m.innerHTML = `<h2 class="ed-h">Messages</h2><p class="muted">Messages from the Contact Us form. Each one is also emailed to ${esc(SITE.contact.notifyEmail)}.</p>
-      ${rows.length ? rows.map(r => `<div class="ed-msg${r.handled ? ' done' : ''}"><div class="ed-msg-h"><b>${esc(r.name)}</b>${r.company ? ' · ' + esc(r.company) : ''}<span>${esc(new Date(r.created_at).toLocaleString())}</span></div>
+      ${rows.length ? rows.map(r => `<div class="ed-msg${r.handled ? ' done' : ''}"><div class="ed-msg-h"><b>${esc(r.name)}</b>${r.company ? ' · ' + esc(r.company) : ''}<span>${esc(new Date(r.created_at).toLocaleString('en-US'))}</span></div>
         <div class="ed-msg-m">${esc([r.business, r.country, r.address].filter(Boolean).join(' · '))}</div>
         <div class="ed-msg-m"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.phone ? ' · ' + esc(r.phone) : ''}</div>
         <p>${esc(r.message)}</p><button type="button" class="btn sm" data-msg="${r.id}" data-h="${r.handled ? 0 : 1}">${r.handled ? 'Mark as new' : 'Mark handled'}</button></div>`).join('') : '<p class="muted">No messages yet.</p>'}`;
